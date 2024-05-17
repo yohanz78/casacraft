@@ -1,0 +1,33 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My REST API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/furnitures": {
+            "get": {
+                "operationId": "5efb06daf80a6d6c6f7de3712deff2c4",
+                "responses": {
+                    "200": {
+                        "description": "Display a listing of items."
+                    }
+                }
+            }
+        },
+        "/furniture": {
+            "get": {
+                "tags": [
+                    "furniture"
+                ],
+                "description": "Display a listing of item",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        }
+    }
+}

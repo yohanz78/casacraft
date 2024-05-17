@@ -3,14 +3,30 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Furniture;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use App\Models\Furniture;
+use OpenApi\Annotations\OpenApi as OA;
+
 
 class FurnitureController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *      path="/furnitures",
+     *      @OA\Response(response="200", description="Display a listing of items.")
+     * )
+     * 
+     * @OA\Get(
+     *      path="/furniture",
+     *      tags={"furniture"},
+     *      description="Display a listing of item",
+     *      operationId="index",
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *      )
+     * )
      */
     public function index()
     {
