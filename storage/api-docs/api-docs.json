@@ -2,30 +2,220 @@
     "openapi": "3.0.0",
     "info": {
         "title": "My REST API",
+        "description": "Laravel project to practice developing RESTFUL API with L5 Swagger OpenAPI",
+        "contact": {
+            "name": "Yohanes UKRIDA",
+            "email": "yohanes.422021005@civitas.ukrida.ac.id"
+        },
         "version": "1.0.0"
     },
     "paths": {
-        "/furnitures": {
-            "get": {
-                "operationId": "5efb06daf80a6d6c6f7de3712deff2c4",
-                "responses": {
-                    "200": {
-                        "description": "Display a listing of items."
-                    }
-                }
-            }
-        },
-        "/furniture": {
+        "/api/furnitures": {
             "get": {
                 "tags": [
                     "furniture"
                 ],
-                "description": "Display a listing of item",
+                "summary": "Display a listing of items",
                 "operationId": "index",
                 "responses": {
                     "200": {
-                        "description": "successful operation"
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
+                }
+            },
+            "post": {
+                "tags": [
+                    "furniture"
+                ],
+                "summary": "Create item",
+                "operationId": "store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Furniture"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/furnitures/{id}": {
+            "get": {
+                "tags": [
+                    "furniture"
+                ],
+                "summary": "Display the specified item",
+                "operationId": "show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of item that needs to be displayed",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "furniture"
+                ],
+                "summary": "Update the specified item",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of item that needs to be updated",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Request body description",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Furniture"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "furniture"
+                ],
+                "summary": "Remove the specified item",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of item that needs to be removed",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Furniture": {
+                "title": "Furniture model",
+                "description": "Furniture model",
+                "required": [
+                    "name",
+                    "price"
+                ],
+                "xml": {
+                    "name": "Furniture"
                 }
             }
         }

@@ -5,6 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use OpenApi\Annotations as OA;
+
+/**
+ *  @OA\Schema(
+ *      description="Furniture model",
+ *      title="Furniture model",
+ *      required={"name", "price"},
+ *      @OA\Xml(
+ *          name="Furniture"
+ *      )
+ *  )
+ */
 
 class Furniture extends Model
 {

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use App\Models\Furniture;
 use OpenApi\Annotations\OpenApi as OA;
@@ -12,21 +14,17 @@ use OpenApi\Annotations\OpenApi as OA;
 class FurnitureController extends Controller
 {
     /**
-     * @OA\Get(
-     *      path="/furnitures",
-     *      @OA\Response(response="200", description="Display a listing of items.")
-     * )
-     * 
-     * @OA\Get(
-     *      path="/furniture",
+     *  @OA\Get(
+     *      path="/api/furnitures",
      *      tags={"furniture"},
-     *      description="Display a listing of item",
+     *      summary="Display a listing of items",
      *      operationId="index",
      *      @OA\Response(
      *          response=200,
-     *          description="successful operation",
+     *          description="Successful operation",
+     *          @OA\JsonContent()
      *      )
-     * )
+     *  )
      */
     public function index()
     {
@@ -34,72 +32,183 @@ class FurnitureController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     *  @OA\Post(
+     *      path="/api/furnitures",
+     *      tags={"furniture"},
+     *      summary="Create item",
+     *      operationId="store",
+     *      @OA\Response(
+     *          response=201,
+     *          description="Successful",
+     *          @OA\JsonContent()
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/Furniture")
+     *          )
+     *      )
+     *  )
      */
     public function store(Request $request)
     {
-        try {
-            $furniture = new Furniture;
-            $furniture->fill($request->validated())->save();
-
-            return $furniture;
-        } catch (\Exception $exception) {
-            throw new HttpException(400, "Invalid data - {$exception->getMessage()}");
-        }
+        $furniture = Furniture::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $request->image,
+            'price' => $request->price
+        ]);
+        return response()->json([
+            'data' => $furniture
+        ]);
     }
 
     /**
-     * Display the specified resource.
+     *  @OA\Get(
+     *      path="/api/furnitures/{id}",
+     *      tags={"furniture"},
+     *      summary="Display the specified item",
+     *      operationId="show",
+     *      @OA\Response(
+     *          response=404,
+     *          description="Item not found",
+     *          @OA\JsonContent()
+     *      ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Invalid input",
+     *          @OA\JsonContent()
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful",
+     *          @OA\JsonContent()
+     *      ),
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          description="ID of item that needs to be displayed",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer",
+     *              format="int64"
+     *          )
+     *      )
+     *  )
      */
     public function show($id)
     {
         $furniture = Furniture::findOrfail($id);
-
+        if (!$furniture) {
+            throw new HttpException("Item not found", 404);
+        }
         return $furniture;
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        // 
-    }
-
-    /**
-     * Update the specified resource in storage.
+     *  @OA\Put(
+     *      path="/api/furnitures/{id}",
+     *      tags={"furniture"},
+     *      summary="Update the specified item",
+     *      operationId="update",
+     *      @OA\Response(
+     *          response=404,
+     *          description="Item not found",
+     *          @OA\JsonContent()
+     *      ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="invalid input",
+     *          @OA\JsonContent()
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful",
+     *          @OA\JsonContent()
+     *      ),
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          description="ID of item that needs to be updated",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer",
+     *              format="int64"
+     *          )
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          description="Request body description",
+     *          @OA\JsonContent(ref="#/components/schemas/Furniture")
+     *      )
+     *  )
      */
     public function update(Request $request, string $id)
     {
+        $furniture = Furniture::find($id);
         if (!$id) {
-            throw new HttpException(400, "Error Processing Request");
+            throw new HttpException("Item not found", 400);
         }
 
         try {
-            $furniture = Furniture::find($id);
+            $validator = Validator::make($request->all(), [
+                'name'  =>  'required',
+                'price' =>  'required',
+            ]);
+            if ($validator->fails()) {
+                throw new HttpException($validator->message()->first(), 400);
+            };
             $furniture->fill($$request->validated())->save();
-
-            return $furniture;
+            return response()->json(array('message' => 'Updated Successfully'), 200);
         } catch (\Exception $exception) {
-            throw new HttpException(400, "Invalid data - {$exception->getMessage()}");
+            throw new HttpException("Invalid data - {$exception->getMessage()}", 400);
         }
     }
 
     /**
-     * Remove the specified resource from storage.
+     *  @OA\Delete(
+     *      path="/api/furnitures/{id}",
+     *      tags={"furniture"},
+     *      summary="Remove the specified item",
+     *      operationId="destroy",
+     *      @OA\Response(
+     *          response=404,
+     *          description="Item not found",
+     *          @OA\JsonContent()
+     *      ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Invalid input",
+     *          @OA\JsonContent()
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful",
+     *          @OA\JsonContent()
+     *      ),
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          description="ID of item that needs to be removed",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer",
+     *              format="int64"
+     *          )
+     *      )
+     *  )
      */
     public function destroy(string $id)
     {
         $furniture = Furniture::findOrfail($id);
-        $furniture->delete();
+        if (!$furniture) {
+            throw new HttpException('Item not found', 404);
+        }
+        try {
+            $furniture->delete();
+            return response()->json(array('message' => 'Deleted successfully'), 200);
+        } catch (\Exception $exception) {
+            throw new HttpException("Invalid data : {$exception->getMessage()}", 400);
+        }
 
         return response()->json(null, 204);
     }
