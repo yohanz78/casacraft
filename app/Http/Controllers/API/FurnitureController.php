@@ -46,7 +46,8 @@ class FurnitureController extends Controller
      *          required=true,
      *          @OA\JsonContent(ref="#/components/schemas/Furniture")
      *          )
-     *      )
+     *      ),
+     *      security={{"passport_token_ready":{},"passport":{}}}
      *  )
      */
     public function store(Request $request)
@@ -139,7 +140,8 @@ class FurnitureController extends Controller
      *          required=true,
      *          description="Request body description",
      *          @OA\JsonContent(ref="#/components/schemas/Furniture")
-     *      )
+     *      ),
+     *      security={{"passport_token_ready":{},"passport":{}}}
      *  )
      */
     public function update(Request $request, string $id)
@@ -194,7 +196,8 @@ class FurnitureController extends Controller
      *              type="integer",
      *              format="int64"
      *          )
-     *      )
+     *      ),
+     *      security={{"passport_token_ready":{},"passport":{}}}
      *  )
      */
     public function destroy(string $id)
