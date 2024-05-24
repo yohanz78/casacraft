@@ -8,4 +8,16 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-Route::apiResource('furnitures', FurnitureController::class);
+Route::resource('book', FurnitureController::class, [
+    'only'=> [
+        'index',
+        'show'
+    ]
+]);
+
+Route::resource('book', FurnitureController::class, [
+    'except'=> [
+        'index',
+        'show'
+    ]
+])->middleware(['auth:api']);

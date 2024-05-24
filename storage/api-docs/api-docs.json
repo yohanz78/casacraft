@@ -10,7 +10,7 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/furnitures": {
+        "/api/furniture": {
             "get": {
                 "tags": [
                     "furniture"
@@ -56,7 +56,7 @@
                 }
             }
         },
-        "/api/furnitures/{id}": {
+        "/api/furniture/{id}": {
             "get": {
                 "tags": [
                     "furniture"

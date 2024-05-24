@@ -17,9 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->text('image');
             $table->double('price');
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at')->nullable();
-            $table->timestamp('deleted_at')->nullable();
+            $table->timestamps();
         });
     }
 

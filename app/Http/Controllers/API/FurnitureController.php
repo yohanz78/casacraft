@@ -15,7 +15,7 @@ class FurnitureController extends Controller
 {
     /**
      *  @OA\Get(
-     *      path="/api/furnitures",
+     *      path="/api/furniture",
      *      tags={"furniture"},
      *      summary="Display a listing of items",
      *      operationId="index",
@@ -33,7 +33,7 @@ class FurnitureController extends Controller
 
     /**
      *  @OA\Post(
-     *      path="/api/furnitures",
+     *      path="/api/furniture",
      *      tags={"furniture"},
      *      summary="Create item",
      *      operationId="store",
@@ -64,7 +64,7 @@ class FurnitureController extends Controller
 
     /**
      *  @OA\Get(
-     *      path="/api/furnitures/{id}",
+     *      path="/api/furniture/{id}",
      *      tags={"furniture"},
      *      summary="Display the specified item",
      *      operationId="show",
@@ -106,7 +106,7 @@ class FurnitureController extends Controller
 
     /**
      *  @OA\Put(
-     *      path="/api/furnitures/{id}",
+     *      path="/api/furniture/{id}",
      *      tags={"furniture"},
      *      summary="Update the specified item",
      *      operationId="update",
@@ -166,7 +166,7 @@ class FurnitureController extends Controller
 
     /**
      *  @OA\Delete(
-     *      path="/api/furnitures/{id}",
+     *      path="/api/furniture/{id}",
      *      tags={"furniture"},
      *      summary="Remove the specified item",
      *      operationId="destroy",
