@@ -170,3 +170,5 @@ class AuthController extends Controller
         }
     }
 }
+
+// Error 500 Fixed

@@ -57,3 +57,5 @@ class User extends Authenticatable
         ];
     }
 }
+
+// Error 500 Fixed

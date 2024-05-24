@@ -222,6 +222,8 @@ return [
                     ],
                 ],
             ],
+            // Error 500 Fixed
+
             'security' => [
                 /*
                  * Examples of Securities

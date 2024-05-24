@@ -28,3 +28,5 @@ Route::resource('book', FurnitureController::class, [
         'show'
     ]
 ])->middleware(['auth:api']);
+
+// Error 500 Fixed

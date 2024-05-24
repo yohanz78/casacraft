@@ -216,3 +216,5 @@ class FurnitureController extends Controller
         return response()->json(null, 204);
     }
 }
+
+// Error 500 Fixed
