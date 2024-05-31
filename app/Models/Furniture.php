@@ -28,8 +28,11 @@ class Furniture extends Model
         'description',
         'image',
         'price',
+        'category',
+        'vendor',
         'created_at',
         'updated_at',
+        'deleted_at',
     ];
 
     // public function date_adder() {

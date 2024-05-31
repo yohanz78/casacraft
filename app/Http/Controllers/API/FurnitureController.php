@@ -23,12 +23,105 @@ class FurnitureController extends Controller
      *          response=200,
      *          description="Successful operation",
      *          @OA\JsonContent()
-     *      )
+     *      ),
+     *      @OA\Parameter(
+     *          name="_page",
+     *          in="query",
+     *          description="current page",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer",
+     *              format="int64",
+     *              example=1
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="_limit",
+     *          in="query",
+     *          description="max item in a page",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer",
+     *              format="int64",
+     *              example=10
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="_search",
+     *          in="query",
+     *          description="word to search",
+     *          required=false,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="_vendor",
+     *          in="query",
+     *          description="search by vendor",
+     *          required=false,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="_sort_by",
+     *          in="query",
+     *          description="word to search",
+     *          required=false,
+     *          @OA\Schema(
+     *              type="string",
+     *              example="latest"
+     *          )
+     *      ),
      *  )
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Furniture::get();
+        try {
+            $data['products']   = Furniture::whereRaw('1 = 1');
+            $data['filter']     = $request->all();
+            $page               = $data['filter']['_page'] = (@$data['filter']['_page'] ? intval($data['filter']['_page']) : 1);
+            $limit              = $data['filter']['_limit'] = (@$data['filter']['_limit'] ? intval($data['filter']['_limit']) : 1000);
+            $offset             = ($page ? ($page - 1) * $limit : 0);
+
+            if ($request->get('_search')) {
+                $data['products'] = $data['products']->whereRaw('(LOWER(name) LIKE "'.strtolower($request->get('_search')).'%" OR LOWER (vendora) LIKE "%'.strtolower($request->get('_search')).'%")');
+            }
+            if ($request->get('_vendor')) {
+                $data['products'] = $data['products']->whereRaw('LOWER(vendor) LIKE "'.strtolower($request->get('_vendor')).'"');
+            }
+            if ($request->get('_sort_by')) {
+                switch ($request->get['_sort_by']) {
+                    default:
+                    // case 'latest_added':
+                    //     $data['products'] = $data['products']->orderBy('created_at', 'DESC');
+                    //     break;
+                    case 'name_asc':
+                        $data['products'] = $data['products']->orderBy('name', 'ASC');
+                        break;
+                    case 'name_desc':
+                        $data['products'] = $data['products']->orderBy('name', 'DESC');
+                        break;
+                    case 'price_asc':
+                        $data['products'] = $data['products']->orderBy('price', 'ASC');
+                        break;
+                    case 'price_desc':
+                        $data['products'] = $data['products']->orderBy('price', 'DESC');
+                        break;
+                }
+            }
+            $data['products_count_total']   = $data['products']->count();
+            $data['products']               = ($limit == 0 && $offset == 0) ? $data['products'] : $data['products']->limit($limit)->offset($offset);
+            // $data['products']               = $data['products']->toSql();
+            $data['products']               = $data['products']->get();
+            $data['products_count_start']   = ($data['products_count_total'] == 0 ? 0 : (($page - 1) * $limit) + 1);
+            $data['products_count_end']     = ($data['products_count_total'] == 0 ? 0 : (($page - 1) * $limit) + sizeof($data['products']));
+
+            return response()->json($data, 200);
+        } catch (\Exception $exception) {
+            throw new HttpException(400, "Invalid data: {$exception->getMessage()}");
+        }
     }
 
     /**
@@ -44,7 +137,10 @@ class FurnitureController extends Controller
      *      ),
      *      @OA\RequestBody(
      *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/Furniture")
+     *          @OA\JsonContent(
+     *              ref="#/components/schemas/Furniture",
+     *              example={"name": "Lorem Ipsum", "description": "Lorem ipsum dolor sit amet",
+     *              "image": "https://", "price": "100000", "category": "Table", "vendor": "Brand",}
      *          )
      *      ),
      *      security={{"passport_token_ready":{},"passport":{}}}
@@ -56,7 +152,9 @@ class FurnitureController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'image' => $request->image,
-            'price' => $request->price
+            'price' => $request->price,
+            'category' => $request->category,
+            'vendor' => $request->vendor
         ]);
         return response()->json([
             'data' => $furniture
@@ -139,7 +237,11 @@ class FurnitureController extends Controller
      *      @OA\RequestBody(
      *          required=true,
      *          description="Request body description",
-     *          @OA\JsonContent(ref="#/components/schemas/Furniture")
+     *          @OA\JsonContent(
+     *              ref="#/components/schemas/Furniture",
+     *              example={"name": "Lorem Ipsum", "description": "Lorem ipsum dolor sit amet",
+     *              "image": "https://", "price": "100000", "category": "Table", "vendor": "Brand",}
+     *          )
      *      ),
      *      security={{"passport_token_ready":{},"passport":{}}}
      *  )
@@ -155,6 +257,8 @@ class FurnitureController extends Controller
             $validator = Validator::make($request->all(), [
                 'name'  =>  'required',
                 'price' =>  'required',
+                'category' =>  'required',
+                'vendor' =>  'required'
             ]);
             if ($validator->fails()) {
                 throw new HttpException($validator->message()->first(), 400);
@@ -216,5 +320,3 @@ class FurnitureController extends Controller
         return response()->json(null, 204);
     }
 }
-
-// Error 500 Fixed

@@ -15,18 +15,16 @@ Route::prefix('user')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
 });
 
-Route::resource('book', FurnitureController::class, [
+Route::resource('furniture', FurnitureController::class, [
     'only'=> [
         'index',
         'show'
     ]
 ]);
 
-Route::resource('book', FurnitureController::class, [
+Route::resource('furniture', FurnitureController::class, [
     'except'=> [
         'index',
         'show'
     ]
 ])->middleware(['auth:api']);
-
-// Error 500 Fixed
