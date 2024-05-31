@@ -5,7 +5,7 @@ function getData() {
     let payload = {
         '_limit': 3,
         '_page': 1,
-        '_sort_by': 'name_asc'
+        '_sort_by': 'latest_added'
     };
 
     axios.get(url, {params:payload}, apiHeaders)

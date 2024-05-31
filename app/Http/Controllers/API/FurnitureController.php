@@ -94,9 +94,9 @@ class FurnitureController extends Controller
             if ($request->get('_sort_by')) {
                 switch ($request->get['_sort_by']) {
                     default:
-                    // case 'latest_added':
-                    //     $data['products'] = $data['products']->orderBy('created_at', 'DESC');
-                    //     break;
+                    case 'latest_added':
+                        $data['products'] = $data['products']->orderBy('created_at', 'DESC');
+                        break;
                     case 'name_asc':
                         $data['products'] = $data['products']->orderBy('name', 'ASC');
                         break;
