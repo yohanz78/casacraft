@@ -86,10 +86,13 @@ class FurnitureController extends Controller
             $offset             = ($page ? ($page - 1) * $limit : 0);
 
             if ($request->get('_search')) {
-                $data['products'] = $data['products']->whereRaw('(LOWER(name) LIKE "'.strtolower($request->get('_search')).'%" OR LOWER (vendora) LIKE "%'.strtolower($request->get('_search')).'%")');
+                $data['products'] = $data['products']->whereRaw('(LOWER(name) LIKE "'.strtolower($request->get('_search')).'%" OR LOWER(vendor) LIKE "%'.strtolower($request->get('_search')).'%" OR LOWER(category) LIKE "%'.strtolower($request->get('_search')).'%")');
             }
             if ($request->get('_vendor')) {
                 $data['products'] = $data['products']->whereRaw('LOWER(vendor) LIKE "'.strtolower($request->get('_vendor')).'"');
+            }
+            if ($request->get('_category')) {
+                $data['products'] = $data['products']->whereRaw('LOWER(category) LIKE "'.strtolower($request->get('_category')).'"');
             }
             if ($request->get('_sort_by')) {
                 switch ($request->get('_sort_by')) {

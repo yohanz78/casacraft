@@ -9,7 +9,7 @@
     
     <title>@yield('title') | 422021005-Yohanes Handoyo</title>
 
-    <link rel="icon" type="image/x-icon" href="{{asset('assets/images/favicon.ico')}}">
+    <link rel="icon" type="image/x-icon" href="{{asset('favicon.ico')}}">
     <link rel="stylesheet" href="{{asset('assets/css/vendor/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/vendor/linearicons.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/vendor/fontawesome-all.min.css')}}">
