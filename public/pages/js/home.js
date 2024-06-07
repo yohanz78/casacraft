@@ -1,6 +1,6 @@
-let id_el_list = document.getElementById('product-preview');
-
+// Product preview slider
 function getData() {
+    let id_el_list = document.getElementById('product-preview');
     let url = baseUrl + '/api/furniture';
     let payload = {
         '_limit': 3,
@@ -50,7 +50,7 @@ function getData() {
             slidesToScroll: 1,
             autoplay: false,
             prevArrow: '<span class="arrow-prv"><i class="icon-chevron-left"></i></span>',
-            prevArrow: '<span class="arrow-next"><i class="icon-chevron-right"></i></span>',
+            nextArrow: '<span class="arrow-next"><i class="icon-chevron-right"></i></span>',
             responsive: [
                 {
                     breakpoint: 1199,

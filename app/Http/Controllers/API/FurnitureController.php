@@ -92,7 +92,7 @@ class FurnitureController extends Controller
                 $data['products'] = $data['products']->whereRaw('LOWER(vendor) LIKE "'.strtolower($request->get('_vendor')).'"');
             }
             if ($request->get('_sort_by')) {
-                switch ($request->get['_sort_by']) {
+                switch ($request->get('_sort_by')) {
                     default:
                     case 'latest_added':
                         $data['products'] = $data['products']->orderBy('created_at', 'DESC');

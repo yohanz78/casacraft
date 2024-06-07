@@ -6,7 +6,9 @@
                 <div class="col-lg-12 d-none d-md-block">
                     <div class="top-logo-area">
                         <div class="logo text-md-center">
-                            <a href="{{route('home')}}"></a>
+                            <a href="{{route('home')}}">
+                                <img src="{{asset('assets/images/logo/logo-transparent-1-2.png')}}" alt="logo" style="width:30%">
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -19,16 +21,16 @@
                         <span class="phone-number font-lg-p" title="Contact us">
                             <a href="#cfd">
                                 <i class="icon-telephone"></i>
-                                {{-- &nbsp;&nbsp; --}}
+                                &nbsp;&nbsp;
                                 <small class="text-color-primary">
                                     <b>+(62) 851-2345-6789</b>
                                 </small>
                             </a>
                         </span>
                     </div>
-                    <div class="logo__hidden ttext-start">
+                    <div class="logo__hidden text-start">
                         <a href="{{route('home')}}">
-                            <img src="{{asset('assets/images/logo/logo.png')}}" alt="logo" style="height:40px">
+                            <img src="{{asset('assets/images/logo/logo-transparent-1-2.png')}}" alt="logo" style="width:40%">
                         </a>
                     </div>
                 </div>
