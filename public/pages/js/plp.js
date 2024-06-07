@@ -131,7 +131,7 @@ function getData(toPage=1) {
                 title: "Error",
                 html: error.message,
                 confirmButtonText: 'Yes',
-            })
+            });
         }
     });
 }
