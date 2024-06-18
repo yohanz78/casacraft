@@ -70,8 +70,8 @@
                         <div class="header-right-items d-none d-md-block">
                             @if (@$_COOKIE['ut'])
                                 <div class="dropdown">
-                                    <a class="dropdown-toggle" role="button" href="#" data-bs-togggle="dropdown">
-                                        Hello, {{ucwords(substr($_COOKIE['ue'], 0, 3))}}
+                                    <a class="dropdown-toggle" role="button" href="#" data-bs-toggle="dropdown">
+                                        Hello, {{ucwords(substr($_COOKIE['ue'], 0, 4))}}
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li>
@@ -87,7 +87,7 @@
                                     </ul>
                                 </div>
                             @else
-                                <a href="#" data-bs-togggle="modal" data-bs-target="#authModal">
+                                <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#authModal">
                                     <i class="icon-user"></i>
                                 </a>
                             @endif
@@ -112,10 +112,10 @@
                 <div class="helendo-tabs">
                     <ul class="nav" role="tablist">
                         <li class="tab__item nav-item active">
-                            <a class="nav-link active" data-bs-togggle="tab" href="#tab_list_06" role="tab">Login</a>
+                            <a class="nav-link active" data-bs-toggle="tab" href="#tab_list_06" role="tab">Login</a>
                         </li>
                         <li class="tab__item nav-item active">
-                            <a class="nav-link" data-bs-togggle="tab" href="#tab_list_07" role="tab">Register</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#tab_list_07" role="tab">Register</a>
                         </li>
                     </ul>
                 </div>
