@@ -10,6 +10,7 @@
     <title>@yield('title') | 422021005-Yohanes Handoyo</title>
 
     <link rel="icon" type="image/x-icon" href="{{asset('favicon.ico')}}">
+    
     <link rel="stylesheet" href="{{asset('assets/css/vendor/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/vendor/linearicons.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/vendor/fontawesome-all.min.css')}}">
@@ -18,7 +19,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/plugins/magnific-popup.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/plugins/easyzoom.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-    @yield('adition_css')
+    @yield('addition_css')
 </head>
 <body class="box-home">
     <div class="page-box">

@@ -1,6 +1,8 @@
 console.log('____plp.js');
 
-let id_el_list = "#product-list";
+let productList = "#product-list"; // Show product list
+let vendorFilter = "#vendor-filter"; // Add vendors on filter
+let categoryfilter = "#category-filter" // Show category list filter
 
 function getDataOnEnter(event) {
     if (event.keyCode == 13) {
@@ -10,6 +12,7 @@ function getDataOnEnter(event) {
 
 function getData(toPage=1) {
     let url = baseUrl+'/api/furniture';
+
     if (toPage) {
         $('[name="_page"]').val(toPage);
     }
@@ -25,7 +28,7 @@ function getData(toPage=1) {
     .then(function (response) {
         console.log('[DATA] response..', response.data);
         let template = ``;
-        // Products
+        // Show products list
         (response.data.products).forEach((item) => {
             template += 
             `<div class="col-lg-3 col-md-4 col-sm-6">
@@ -55,8 +58,30 @@ function getData(toPage=1) {
                 </div>
             </div>`;
         });
-        $(id_el_list).html(template);
+        $(productList).html(template);
+
+        // Vendor filter
+        const uniqueVendor = [...new Set(response.data.products.map(item => item.vendor))];
+
+        uniqueVendor.forEach(vendor => {
+            const option = document.createElement('option');
+            option.value = vendor;
+            option.textContent = vendor;
+            
+            $(vendorFilter).append(option);
+        });
         
+        // Category filter
+        const uniqueCategory = [...new Set(response.data.products.map(item => item.category))];
+
+        uniqueCategory.forEach(category => {
+            const a = document.createElement('a');
+            a.href = category;
+            a.textContent = category;
+            
+            $(categoryfilter).append(a);
+        });
+
         // Pagination
         $('#products_count_start').html(response.data.products_count_start);
         $('#products_count_end').html(response.data.products_count_end);
@@ -110,7 +135,7 @@ function getData(toPage=1) {
             </li>`;
         }
 
-        $(id_el_list+'-pagination').html(template);
+        $(productList+'-pagination').html(template);
         $('[name = "_page"]').val(response.data.filter._page);
     })
     .catch(function (error) {

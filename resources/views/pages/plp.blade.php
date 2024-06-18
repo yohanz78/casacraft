@@ -14,8 +14,9 @@
                     <div class="shop-widget widget-shop-publisher mt-3">
                         <div class="product-filter">
                             <h6 class="mb-20">Vendors</h6>
-                            <select name="#" id="vendor-filter" onchange="#" class="_filter form-select form-select-sm">
-                                {{-- Integrate with API! --}}
+                            <select name="_vendor" id="vendor-filter" onchange="getData()" class="_filter form-select form-select-sm">
+                                {{-- Integrate with API --}}
+                                <option value="" selected>All</option>
                             </select>
                         </div>
                     </div>
@@ -25,8 +26,9 @@
                         <div class="product-filter widget-price">
                             <h6 class="mb-20">Price</h6>
                             <ul class="widget-nav-list" id="price-filter">
-                                {{-- Integrate with API --}}
-                                {{-- Use input type checkbox --}}
+                                <li><a href="#">Under IDR 1.000.000</a></li>
+                                <li><a href="#">IDR 1.000.000 - 5.000.000</a></li>
+                                <li><a href="#">Above IDR 5.000.000</a></li>
                             </ul>
                         </div>
                     </div>

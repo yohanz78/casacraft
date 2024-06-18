@@ -61,7 +61,7 @@
                         </div>
 
                         <div class="header-right-items">
-                            <a href="#cart" class="header-cart">
+                            <a href="#minicart" class="header-cart">
                                 <i class="icon-bag2"></i>
                                 <span class="item-counter">1</span>
                             </a>
@@ -70,7 +70,7 @@
                         <div class="header-right-items d-none d-md-block">
                             @if (@$_COOKIE['ut'])
                                 <div class="dropdown">
-                                    <a href="#" class="dropdown-toggle" role="button" data-bs-togggle="dropdown">
+                                    <a class="dropdown-toggle" role="button" href="#" data-bs-togggle="dropdown">
                                         Hello, {{ucwords(substr($_COOKIE['ue'], 0, 3))}}
                                     </a>
                                     <ul class="dropdown-menu">
@@ -115,7 +115,7 @@
                             <a class="nav-link active" data-bs-togggle="tab" href="#tab_list_06" role="tab">Login</a>
                         </li>
                         <li class="tab__item nav-item active">
-                            <a class="nav-link" data-bs-togggle="tab" href="#tab_list_06" role="tab">Register</a>
+                            <a class="nav-link" data-bs-togggle="tab" href="#tab_list_07" role="tab">Register</a>
                         </li>
                     </ul>
                 </div>
@@ -170,7 +170,7 @@
                                 <a href="#" class="text-color-primary" target="_blank">Privacy Policy</a>.
                             </p>
                             <div class="button-box mt25">
-                                <a href="#" class="btn brn--full btn--black" id="form-login-btn">Register</a>
+                                <a href="#" class="btn brn--full btn--black" id="form-register-btn">Register</a>
                             </div>
                         </form>
                         <div id="form-login-loading" style="text-align:center; display:none">

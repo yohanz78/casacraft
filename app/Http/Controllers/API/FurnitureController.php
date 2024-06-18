@@ -94,6 +94,9 @@ class FurnitureController extends Controller
             if ($request->get('_category')) {
                 $data['products'] = $data['products']->whereRaw('LOWER(category) LIKE "'.strtolower($request->get('_category')).'"');
             }
+            if ($request->get('_price')) {
+                $data['products'] = $data['products']->whereRaw('LOWER(price) LIKE "'.strtolower($request->get('_price')).'"');
+            }
             if ($request->get('_sort_by')) {
                 switch ($request->get('_sort_by')) {
                     default:
