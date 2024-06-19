@@ -58,7 +58,7 @@
             <div class="container"> 
                 <div class="brand-slider-active">
                     @php
-                        $partner_count = 4
+                        $partner_count = 5
                     @endphp
                     @for ($i = 1; $i < $partner_count; $i++)
                         <div class="col-lg-12">
