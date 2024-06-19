@@ -11,6 +11,7 @@
 
     <link rel="icon" type="image/x-icon" href="{{asset('favicon.ico')}}">
     
+    
     <link rel="stylesheet" href="{{asset('assets/css/vendor/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/vendor/linearicons.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/vendor/fontawesome-all.min.css')}}">

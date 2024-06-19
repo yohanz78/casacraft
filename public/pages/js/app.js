@@ -3,10 +3,10 @@ console.log('____app.js');
 const baseUrl = window.location.origin;
 const apiHeaders = {
     headers: {
-        "Accept": "*/*",
-        "Access-Control-Allow-Origin": "*",
-        // "Content-Type": "application/json",
-        "Content-Type": "multipart/form-data",
+        'Accept': '*/*',
+        'Access-Control-Allow-Origin': '*',
+        // 'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
     }
 };
 
@@ -30,7 +30,7 @@ function breakWord(text) {
 
 function getCookie(name) {
     let value = `; ${document.cookie}`
-    let parts = value.split(`; ${name} =`);
+    let parts = value.split(`; ${name}=`);
 
     if (parts.length === 2) {
         return parts.pop().split(';').shift();
@@ -40,7 +40,7 @@ function getCookie(name) {
 // AXIOS implementation for Logout with authorization
 $("#logout-btn").on('click', function (e) {
     apiHeaders['headers']['Authorization'] = 'Bearer ' + getCookie('ut');
-    let url = baseUrl + 'api/user/logout';
+    let url = baseUrl + '/api/user/logout';
 
     axios.post(url, {}, apiHeaders)
     .then(function (response) {
@@ -76,7 +76,7 @@ $("#logout-btn").on('click', function (e) {
 // AXIOS implementation for Login
 $("#form-login-btn").on('click', function (e) {
     const form = document.getElementById('form-login');
-    form.reportValidty();
+    form.reportValidity();
 
     if (!form.checkValidity()) {
     } else {
@@ -115,7 +115,7 @@ $("#form-login-btn").on('click', function (e) {
 // AXIOS implementation for Register
 $("#form-register-btn").on('click', function (e) {
     const form = document.getElementById('form-register');
-    form.reportValidty();
+    form.reportValidity();
     if (!form.checkValidity()) {
     } else {
         $('#form-login-error').html('');

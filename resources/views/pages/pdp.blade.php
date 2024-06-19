@@ -89,12 +89,12 @@
 
                         <div class="product_meta mt-30">
                             <div class="posted_in item_meta">
-                                <span class="label">Category:</span>
-                                <span class="text-color-primary" id="product-category"></span>
-                            </div>
-                            <div class="posted_in item_meta">
                                 <span class="label">Vendor:</span>
                                 <span class="text-color-primary" id="product-vendor"></span>
+                            </div>
+                            <div class="tagged_as item_meta">
+                                <span class="label">Category:</span>
+                                <span class="blog-tagcloud" id="product-category"></span>
                             </div>
                         </div>
 

@@ -17,6 +17,10 @@
                             <select name="_vendor" id="vendor-filter" onchange="getData()" class="_filter form-select form-select-sm">
                                 {{-- Integrate with API --}}
                                 <option value="" selected>All</option>
+                                <option value="ikea">IKEA</option>
+                                <option value="juno">JUNO</option>
+                                <option value="informa">Informa</option>
+                                <option value="lagom">LAGOM</option>
                             </select>
                         </div>
                     </div>
@@ -27,8 +31,8 @@
                             <h6 class="mb-20">Price</h6>
                             <ul class="widget-nav-list" id="price-filter">
                                 <li><a href="#">Under IDR 1.000.000</a></li>
-                                <li><a href="#">IDR 1.000.000 - 5.000.000</a></li>
-                                <li><a href="#">Above IDR 5.000.000</a></li>
+                                <li><a href="#">IDR 1.000.000 - 10.000.000</a></li>
+                                <li><a href="#">Above IDR 10.000.000</a></li>
                             </ul>
                         </div>
                     </div>
@@ -56,8 +60,12 @@
                                     </p>
                                 </div>
                                 <div class="shop-toolbar__item">
-                                    <select name="_sort_by" id="product-filter" class="_filter form-select form-select-sm">
-                                        {{-- Integrate with API! --}}
+                                    <select id="product-filter" class="_filter form-select form-select-sm" name="_sort_by" onchange="getData()">
+                                        <option value="latest_added">Sort by latest added</option>
+                                        <option value="name_asc">Sort by A-Z</option>
+                                        <option value="name_desc">Sort by Z-A</option>
+                                        <option value="price_asc">Sort by price: low to high</option>
+                                        <option value="price_desc">Sort by price: high to low</option>
                                     </select>
                                 </div>
                             </div>

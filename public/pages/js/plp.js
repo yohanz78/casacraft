@@ -59,17 +59,6 @@ function getData(toPage=1) {
             </div>`;
         });
         $(productList).html(template);
-
-        // Vendor filter
-        const uniqueVendor = [...new Set(response.data.products.map(item => item.vendor))];
-
-        uniqueVendor.forEach(vendor => {
-            const option = document.createElement('option');
-            option.value = vendor;
-            option.textContent = vendor;
-            
-            $(vendorFilter).append(option);
-        });
         
         // Category filter
         const uniqueCategory = [...new Set(response.data.products.map(item => item.category))];

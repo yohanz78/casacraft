@@ -34,15 +34,6 @@ function getDataByUrlKey() {
             $('.product-add-to-cart-is-disabled').show();
         }
 
-        // Category
-        let categories = [];
-        let selectedCategory = categories.sort(() => .5 - Math.random()).slice(0,1);
-        
-        template = '';
-        for (let index = 0; index < selectedCategory.length; index++) {
-            template += '<a href="#">'+selectedCategory[index]+'</a>'+(index!=selectedCategory.length-1?', ':'');
-        }
-        $('#product-category').html(template);
     }).catch(function (error) {
         console.log('[ERROR] response..', error.code)
         if (error.code == "ERR_BAD_REQUEST") {
